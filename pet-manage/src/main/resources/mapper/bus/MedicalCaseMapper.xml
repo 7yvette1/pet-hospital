@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xzj.mapper.bus.MedicalCaseMapper">
+
+    <sql id="Base_Column_List">
+        id,registerId,name,gender,age,phone,visitDate,doctorId,medicalInfo,diagnosis,adviceInfo
+    </sql>
+
+    <select id="selectAll" resultType="com.xzj.entity.bus.MedicalCase">
+        select
+        a.*,b.nick_name as docName
+        from medical_case a
+        left join sys_user b on a.doctorId = b.user_id
+        <where>
+            <if test="name != null"> and name like concat('%', #{name}, '%')</if>
+            <if test="doctorId != null"> and doctorId = #{doctorId}</if>
+        </where>
+        order by id
+    </select>
+
+
+    <select id="selectMyPage" resultType="com.xzj.entity.bus.MedicalCase">
+        select
+        a.*,b.nick_name as docName
+        from medical_case a
+        left join sys_user b on a.doctorId = b.user_id
+        left join register_info c on a.registerId = c.id
+        left join front_user d on d.user_id = c.user_id
+        <where>
+            <if test="userId != null"> and d.user_id = #{userId}</if>
+        </where>
+        order by id
+    </select>
+
+    <select id="selectById" resultType="com.xzj.entity.bus.MedicalCase">
+        select
+        <include refid="Base_Column_List" />
+        from medical_case
+        where id = #{id}
+    </select>
+
+    <delete id="deleteById">
+        delete from medical_case
+        where  id = #{id}
+    </delete>
+
+    <insert id="insert" parameterType="com.xzj.entity.bus.MedicalCase" useGeneratedKeys="true">
+        insert into medical_case
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="id != null">id,</if>
+                <if test="registerId != null">registerId,</if>
+                <if test="name != null">name,</if>
+                <if test="gender != null">gender,</if>
+                <if test="age != null">age,</if>
+                <if test="phone != null">phone,</if>
+                <if test="visitDate != null">visitDate,</if>
+                <if test="doctorId != null">doctorId,</if>
+                <if test="medicalInfo != null">medicalInfo,</if>
+                <if test="diagnosis != null">diagnosis,</if>
+                <if test="adviceInfo != null">adviceInfo,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="id != null">#{id},</if>
+                <if test="registerId != null">#{registerId},</if>
+                <if test="name != null">#{name},</if>
+                <if test="gender != null">#{gender},</if>
+                <if test="age != null">#{age},</if>
+                <if test="phone != null">#{phone},</if>
+                <if test="visitDate != null">#{visitDate},</if>
+                <if test="doctorId != null">#{doctorId},</if>
+                <if test="medicalInfo != null">#{medicalInfo},</if>
+                <if test="diagnosis != null">#{diagnosis},</if>
+                <if test="adviceInfo != null">#{adviceInfo},</if>
+        </trim>
+    </insert>
+
+    <update id="updateById" parameterType="com.xzj.entity.bus.MedicalCase">
+        update medical_case
+        <set>
+            <if test="registerId != null">
+                registerId = #{registerId},
+            </if>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="gender != null">
+                gender = #{gender},
+            </if>
+            <if test="age != null">
+                age = #{age},
+            </if>
+            <if test="phone != null">
+                phone = #{phone},
+            </if>
+            <if test="visitDate != null">
+                visitDate = #{visitDate},
+            </if>
+            <if test="doctorId != null">
+                doctorId = #{doctorId},
+            </if>
+            <if test="medicalInfo != null">
+                medicalInfo = #{medicalInfo},
+            </if>
+            <if test="diagnosis != null">
+                diagnosis = #{diagnosis},
+            </if>
+            <if test="adviceInfo != null">
+                adviceInfo = #{adviceInfo},
+            </if>
+        </set>
+        where id = #{id} 
+    </update>
+
+</mapper>

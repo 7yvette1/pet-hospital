@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xzj.mapper.bus.RegisterInfoMapper">
+
+    <sql id="Base_Column_List">
+        id,clinic_id,user_id,doc_id,status,time,receive_id,receive_time
+    </sql>
+
+    <select id="selectAll" resultType="com.xzj.entity.bus.RegisterInfo">
+        select
+        a.*,b.nick_name as userName
+        from register_info a
+        left join front_user b on a.user_id = b.user_id
+        <where>
+            <if test="userId != null"> and a.user_id = #{userId}</if>
+            <if test="status != null"> and a.status = #{status}</if>
+            <if test="receiveId != null"> and a.receive_id = #{receiveId}</if>
+        </where>
+        order by id
+    </select>
+
+    <select id="selectAll1" resultType="com.xzj.entity.bus.RegisterInfo">
+        select t.*,b.name as clinicName,c.nick_name as userName from
+        (select
+        *
+        from register_info where clinic_id != '') t
+        left join bus_category b on t.clinic_id = b.id
+        left join front_user c on t.user_id = c.user_id
+        <where>
+            <if test="clinicName != null"> and b.name = #{clinicName}</if>
+        </where>
+        order by id
+    </select>
+
+    <select id="selectAll2" resultType="com.xzj.entity.bus.RegisterInfo">
+        select t.*,b.nick_name as userName,c.nick_name as docName from
+        (select
+        *
+        from register_info where doc_id != '') t
+        left join front_user b on t.user_id = b.user_id
+        left join sys_user c on t.doc_id = c.user_id
+        <where>
+            <if test="docName != null"> and c.nick_name = #{docName}</if>
+            <if test="docId != null"> and t.doc_id = #{docId}</if>
+        </where>
+        order by id
+    </select>
+
+    <select id="selectById" resultType="com.xzj.entity.bus.RegisterInfo">
+        select
+        <include refid="Base_Column_List" />
+        from register_info
+        where id = #{id}
+    </select>
+
+    <delete id="deleteById">
+        delete from register_info
+        where  id = #{id}
+    </delete>
+
+    <insert id="insert" parameterType="com.xzj.entity.bus.RegisterInfo" useGeneratedKeys="true">
+        insert into register_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="id != null">id,</if>
+                <if test="clinicId != null">clinic_id,</if>
+                <if test="userId != null">user_id,</if>
+                <if test="docId != null">doc_id,</if>
+                <if test="status != null">status,</if>
+                <if test="time != null">time,</if>
+                <if test="receiveId != null">receive_id,</if>
+                <if test="receiveTime != null">receive_time,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="id != null">#{id},</if>
+                <if test="clinicId != null">#{clinicId},</if>
+                <if test="userId != null">#{userId},</if>
+                <if test="docId != null">#{docId},</if>
+                <if test="status != null">#{status},</if>
+                <if test="time != null">#{time},</if>
+                <if test="receiveId != null">#{receiveId},</if>
+                <if test="receiveTime != null">#{receiveTime},</if>
+        </trim>
+    </insert>
+
+    <update id="updateById" parameterType="com.xzj.entity.bus.RegisterInfo">
+        update register_info
+        <set>
+            <if test="clinicId != null">
+                clinic_id = #{clinicId},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId},
+            </if>
+            <if test="docId != null">
+                doc_id = #{docId},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="time != null">
+                time = #{time},
+            </if>
+            <if test="receiveId != null">
+                receive_id = #{receiveId},
+            </if>
+            <if test="receiveTime != null">
+                receive_time = #{receiveTime},
+            </if>
+        </set>
+        where id = #{id} 
+    </update>
+
+    <select id="selectRegisterApply" resultType="com.xzj.entity.bus.RegisterInfo">
+        select *
+        from register_info
+        <where>
+            <if test="time != null"> and time like concat(#{time}, '%')</if>
+        </where>
+    </select>
+
+</mapper>

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xzj.mapper.system.SysUserMapper">
+    <sql id="Base_Column_List">
+        user_id,user_name,nick_name,password,status,email,phone,sex,avatar,create_by,create_time,remark,job,descr,beGoodAt
+    </sql>
+
+    <insert id="add" parameterType="com.xzj.entity.system.SysUser" useGeneratedKeys="true">
+        insert into sys_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="userName != null">user_name,</if>
+            <if test="nickName != null">nick_name,</if>
+            <if test="password != null">password,</if>
+            <if test="status != null">status,</if>
+            <if test="email != null">email,</if>
+            <if test="phone != null">phone,</if>
+            <if test="sex != null">sex,</if>
+            <if test="avatar != null">avatar,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="remark != null">remark,</if>
+            <if test="job != null">job,</if>
+            <if test="descr != null">descr,</if>
+            <if test="beGoodAt != null">beGoodAt,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="userName != null">#{userName},</if>
+            <if test="nickName != null">#{nickName},</if>
+            <if test="password != null">#{password},</if>
+            <if test="status != null">#{status},</if>
+            <if test="email != null">#{email},</if>
+            <if test="phone != null">#{phone},</if>
+            <if test="sex != null">#{sex},</if>
+            <if test="avatar != null">#{avatar},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="job != null">#{job},</if>
+            <if test="descr != null">#{descr},</if>
+            <if test="beGoodAt != null">#{beGoodAt},</if>
+        </trim>
+    </insert>
+
+    <update id="updateById" parameterType="com.xzj.entity.system.SysUser">
+        update sys_user
+        <set>
+            <if test="userName != null">
+                user_name = #{userName},
+            </if>
+            <if test="nickName != null">
+                nick_name = #{nickName},
+            </if>
+            <if test="password != null">
+                password = #{password},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="email != null">
+                email = #{email},
+            </if>
+            <if test="phone != null">
+                phone = #{phone},
+            </if>
+            <if test="sex != null">
+                sex = #{sex},
+            </if>
+            <if test="avatar != null">
+                avatar = #{avatar},
+            </if>
+            <if test="createBy != null">
+                create_by = #{createBy},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="remark != null">
+                remark = #{remark},
+            </if>
+            <if test="job != null">
+                job = #{job},
+            </if>
+            <if test="descr != null">
+                descr = #{descr},
+            </if>
+            <if test="beGoodAt != null">
+                beGoodAt = #{beGoodAt, jdbcType=VARCHAR},
+            </if>
+        </set>
+        where user_id = #{userId}
+    </update>
+
+    <delete id="deleteById">
+        delete from sys_user
+        where user_id = #{userId}
+    </delete>
+
+    <select id="selectById" resultType="com.xzj.entity.system.SysUser">
+        select
+        <include refid="Base_Column_List" />
+        from sys_user
+        where user_id = #{userId}
+    </select>
+
+    <select id="selectAll" resultType="com.xzj.entity.system.SysUser">
+        select
+        <include refid="Base_Column_List" />
+        from sys_user
+        <where>
+            <if test="userId != null"> and user_id = #{userId}</if>
+            <if test="userName != null"> and user_name like concat('%', #{userName}, '%')</if>
+            <if test="nickName != null"> and nick_name like concat('%', #{nickName}, '%')</if>
+            <if test="status != null"> and status = #{status}</if>
+            <if test="createTime != null"> and create_time like concat(#{createTime}, '%')</if>
+        </where>
+        order by user_id
+    </select>
+
+
+    <select id="selectDoc" resultType="com.xzj.entity.system.SysUser">
+        select
+        a.*
+        from sys_user a left join sys_user_role b on a.user_id = b.user_id
+        where b.role_id = '2'
+    </select>
+
+    <select id="selectByUserAndPassword" resultType="com.xzj.entity.system.SysUser">
+        select
+        <include refid="Base_Column_List" />
+        from sys_user
+        where user_name = #{userName} and password = #{password}
+    </select>
+
+    <update id="updatePassword" parameterType="com.xzj.entity.system.SysUser">
+        update sys_user
+        <set>
+            <if test="newPassword != null">
+                password = #{newPassword},
+            </if>
+        </set>
+        where user_id = #{userId}
+    </update>
+</mapper>

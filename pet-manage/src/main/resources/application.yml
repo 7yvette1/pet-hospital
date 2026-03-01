@@ -1,0 +1,43 @@
+# 指定端口
+server:
+  port: 8888
+
+# 指定配置文件
+spring:
+  profiles:
+    active:
+    - dev
+
+
+# 配置mybatis实体和xml映射
+mybatis:
+  mapper-locations: classpath:mapper/*.xml,classpath:mapper/**/*.xml
+  type-handlers-package: com.xzj.common.handler
+  type-aliases-package: com.xzj.entity
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+
+# 日志配置
+logging:
+  level:
+    springfox: error
+    com.xzj: info
+    org.springframework: warn
+
+# 分页
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+
+
+
+# 文心一言
+bdqfllm:
+  API_KEY: Vd38CEmK3Bh7F2NGG3LRCrHx
+  SECRET_KEY: cAhekTidywDwzwOdi5MrthNEaRGWl7Q3
+  API_HOST: https://aip.baidubce.com
+  API_URI: /rpc/2.0/ai_custom/v1/wenxinworkshop/chat/eb-instant?access_token=ACCESS_TOKEN
+  TOKEN_URL: https://aip.baidubce.com/oauth/2.0/token?grant_type=client_credentials&client_id=API_KEY&client_secret=SECRET_KEY

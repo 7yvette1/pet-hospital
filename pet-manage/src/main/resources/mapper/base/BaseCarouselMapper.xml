@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xzj.mapper.base.BaseCarouselMapper">
+
+    <sql id="Base_Column_List">
+        id,image,isinuse,time,user
+    </sql>
+
+    <select id="selectAll" resultType="com.xzj.entity.base.BaseCarousel">
+        select
+        <include refid="Base_Column_List" />
+        from base_carousel
+        <where>
+            <if test="id != null"> and id= #{id}</if>
+            <if test="image != null"> and image like concat('%', #{image}, '%')</if>
+            <if test="isinuse != null"> and isinuse= #{isinuse}</if>
+            <if test="time != null"> and time= #{time}</if>
+            <if test="user != null"> and user= #{user}</if>
+        </where>
+        order by id desc
+    </select>
+
+    <select id="selectById" resultType="com.xzj.entity.base.BaseCarousel">
+        select
+        <include refid="Base_Column_List" />
+        from base_carousel
+        where id = #{id}
+    </select>
+
+    <delete id="deleteById">
+        delete from base_carousel
+        where  id = #{id}
+    </delete>
+
+    <insert id="insert" parameterType="com.xzj.entity.base.BaseCarousel" useGeneratedKeys="true">
+        insert into base_carousel
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="id != null">id,</if>
+                <if test="image != null">image,</if>
+                <if test="isinuse != null">isinuse,</if>
+                <if test="time != null">time,</if>
+                <if test="user != null">user,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="id != null">#{id},</if>
+                <if test="image != null">#{image},</if>
+                <if test="isinuse != null">#{isinuse},</if>
+                <if test="time != null">#{time},</if>
+                <if test="user != null">#{user},</if>
+        </trim>
+    </insert>
+
+    <update id="updateById" parameterType="com.xzj.entity.base.BaseCarousel">
+        update base_carousel
+        <set>
+            <if test="image != null">
+                image = #{image},
+            </if>
+            <if test="isinuse != null">
+                isinuse = #{isinuse},
+            </if>
+            <if test="time != null">
+                time = #{time},
+            </if>
+            <if test="user != null">
+                user = #{user},
+            </if>
+        </set>
+        where id = #{id} 
+    </update>
+
+</mapper>

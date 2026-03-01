@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xzj.mapper.base.ChatMessageMapper">
+
+    <sql id="Base_Column_List">
+        id,chat_list_id,from_user_id,to_user_id,from_user_nick,to_user_nick,content,send_time,is_read
+    </sql>
+
+    <select id="selectAll" resultType="com.xzj.entity.base.ChatMessage">
+        select
+        <include refid="Base_Column_List" />
+        from chat_message
+        <where>
+            <if test="id != null"> and id= #{id}</if>
+        </where>
+        order by id desc
+    </select>
+
+    <select id="selectById" resultType="com.xzj.entity.base.ChatMessage">
+        select
+        <include refid="Base_Column_List" />
+        from chat_message
+        where id = #{id}
+    </select>
+
+    <delete id="deleteById">
+        delete from chat_message
+        where  id = #{id}
+    </delete>
+
+    <insert id="insert" parameterType="com.xzj.entity.base.ChatMessage" useGeneratedKeys="true">
+        insert into chat_message
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="id != null">id,</if>
+                <if test="chatListId != null">chat_list_id,</if>
+                <if test="fromUserId != null">from_user_id,</if>
+                <if test="toUserId != null">to_user_id,</if>
+                <if test="fromUserNick != null">from_user_nick,</if>
+                <if test="toUserNick != null">to_user_nick,</if>
+                <if test="content != null">content,</if>
+                <if test="sendTime != null">send_time,</if>
+                <if test="isRead != null">is_read,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="id != null">#{id},</if>
+                <if test="chatListId != null">#{chatListId},</if>
+                <if test="fromUserId != null">#{fromUserId},</if>
+                <if test="toUserId != null">#{toUserId},</if>
+                <if test="fromUserNick != null">#{fromUserNick},</if>
+                <if test="toUserNick != null">#{toUserNick},</if>
+                <if test="content != null">#{content},</if>
+                <if test="sendTime != null">#{sendTime},</if>
+                <if test="isRead != null">#{isRead},</if>
+        </trim>
+    </insert>
+
+    <update id="updateById" parameterType="com.xzj.entity.base.ChatMessage">
+        update chat_message
+        <set>
+            <if test="chatListId != null">
+                chat_list_id = #{chatListId},
+            </if>
+            <if test="fromUserId != null">
+                from_user_id = #{fromUserId},
+            </if>
+            <if test="toUserId != null">
+                to_user_id = #{toUserId},
+            </if>
+            <if test="fromUserNick != null">
+                from_user_nick = #{fromUserNick},
+            </if>
+            <if test="toUserNick != null">
+                to_user_nick = #{toUserNick},
+            </if>
+            <if test="content != null">
+                content = #{content},
+            </if>
+            <if test="sendTime != null">
+                send_time = #{sendTime},
+            </if>
+            <if test="isRead != null">
+                is_read = #{isRead},
+            </if>
+        </set>
+        where id = #{id} 
+    </update>
+
+
+    <select id="getMessageList" resultType="com.xzj.entity.base.ChatMessage">
+        select
+        <include refid="Base_Column_List" />
+        from chat_message
+        <where>
+            <if test="chatListId != null"> and chat_list_id= #{chatListId}</if>
+        </where>
+        order by send_time desc
+    </select>
+
+</mapper>

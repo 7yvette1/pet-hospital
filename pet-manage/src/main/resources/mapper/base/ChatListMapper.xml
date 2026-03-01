@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xzj.mapper.base.ChatListMapper">
+
+    <sql id="Base_Column_List">
+        id,product_id,product_image,from_user_id,from_user_avatar,from_user_nick,to_user_id,to_user_nick,to_user_avatar,create_time,update_time
+    </sql>
+
+    <select id="selectAll" resultType="com.xzj.entity.base.ChatList">
+        select
+        <include refid="Base_Column_List" />
+        from chat_list
+        <where>
+            <if test="id != null"> and id= #{id}</if>
+        </where>
+        order by id desc
+    </select>
+
+    <select id="selectById" resultType="com.xzj.entity.base.ChatList">
+        select
+        <include refid="Base_Column_List" />
+        from chat_list
+        where id = #{id}
+    </select>
+
+    <delete id="deleteById">
+        delete from chat_list
+        where  id = #{id}
+    </delete>
+
+    <insert id="insert" parameterType="com.xzj.entity.base.ChatList" useGeneratedKeys="true">
+        insert into chat_list
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="id != null">id,</if>
+                <if test="productId != null">product_id,</if>
+                <if test="productImage != null">product_image,</if>
+                <if test="fromUserId != null">from_user_id,</if>
+                <if test="fromUserAvatar != null">from_user_avatar,</if>
+                <if test="fromUserNick != null">from_user_nick,</if>
+                <if test="toUserId != null">to_user_id,</if>
+                <if test="toUserNick != null">to_user_nick,</if>
+                <if test="toUserAvatar != null">to_user_avatar,</if>
+                <if test="createTime != null">create_time,</if>
+                <if test="updateTime != null">update_time,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="id != null">#{id},</if>
+                <if test="productId != null">#{productId},</if>
+                <if test="productImage != null">#{productImage},</if>
+                <if test="fromUserId != null">#{fromUserId},</if>
+                <if test="fromUserAvatar != null">#{fromUserAvatar},</if>
+                <if test="fromUserNick != null">#{fromUserNick},</if>
+                <if test="toUserId != null">#{toUserId},</if>
+                <if test="toUserNick != null">#{toUserNick},</if>
+                <if test="toUserAvatar != null">#{toUserAvatar},</if>
+                <if test="createTime != null">#{createTime},</if>
+                <if test="updateTime != null">#{updateTime},</if>
+        </trim>
+    </insert>
+
+    <update id="updateById" parameterType="com.xzj.entity.base.ChatList">
+        update chat_list
+        <set>
+            <if test="productId != null">
+                product_id = #{productId},
+            </if>
+            <if test="productImage != null">
+                product_image = #{productImage},
+            </if>
+            <if test="fromUserId != null">
+                from_user_id = #{fromUserId},
+            </if>
+            <if test="fromUserAvatar != null">
+                from_user_avatar = #{fromUserAvatar},
+            </if>
+            <if test="fromUserNick != null">
+                from_user_nick = #{fromUserNick},
+            </if>
+            <if test="toUserId != null">
+                to_user_id = #{toUserId},
+            </if>
+            <if test="toUserNick != null">
+                to_user_nick = #{toUserNick},
+            </if>
+            <if test="toUserAvatar != null">
+                to_user_avatar = #{toUserAvatar},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+        </set>
+        where id = #{id} 
+    </update>
+
+</mapper>

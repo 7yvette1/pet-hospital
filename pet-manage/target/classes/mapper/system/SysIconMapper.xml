@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xzj.mapper.system.SysIconMapper">
+    <sql id="Base_Column_List">
+        icon_id,icon_name
+    </sql>
+
+    <select id="selectAll" resultType="com.xzj.entity.system.SysIcon">
+        select
+        <include refid="Base_Column_List" />
+        from sys_icon
+        order by icon_id
+    </select>
+</mapper>
