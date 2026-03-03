@@ -2,13 +2,13 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.xzj.mapper.base.BaseCarouselMapper">
+<mapper namespace="com.scnu.mapper.base.BaseCarouselMapper">
 
     <sql id="Base_Column_List">
         id,image,isinuse,time,user
     </sql>
 
-    <select id="selectAll" resultType="com.xzj.entity.base.BaseCarousel">
+    <select id="selectAll" resultType="com.scnu.entity.base.BaseCarousel">
         select
         <include refid="Base_Column_List" />
         from base_carousel
@@ -22,7 +22,7 @@
         order by id desc
     </select>
 
-    <select id="selectById" resultType="com.xzj.entity.base.BaseCarousel">
+    <select id="selectById" resultType="com.scnu.entity.base.BaseCarousel">
         select
         <include refid="Base_Column_List" />
         from base_carousel
@@ -34,7 +34,7 @@
         where  id = #{id}
     </delete>
 
-    <insert id="insert" parameterType="com.xzj.entity.base.BaseCarousel" useGeneratedKeys="true">
+    <insert id="insert" parameterType="com.scnu.entity.base.BaseCarousel" useGeneratedKeys="true">
         insert into base_carousel
         <trim prefix="(" suffix=")" suffixOverrides=",">
                 <if test="id != null">id,</if>
@@ -52,7 +52,7 @@
         </trim>
     </insert>
 
-    <update id="updateById" parameterType="com.xzj.entity.base.BaseCarousel">
+    <update id="updateById" parameterType="com.scnu.entity.base.BaseCarousel">
         update base_carousel
         <set>
             <if test="image != null">

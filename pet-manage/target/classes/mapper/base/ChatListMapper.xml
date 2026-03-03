@@ -2,13 +2,13 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.xzj.mapper.base.ChatListMapper">
+<mapper namespace="com.scnu.mapper.base.ChatListMapper">
 
     <sql id="Base_Column_List">
         id,product_id,product_image,from_user_id,from_user_avatar,from_user_nick,to_user_id,to_user_nick,to_user_avatar,create_time,update_time
     </sql>
 
-    <select id="selectAll" resultType="com.xzj.entity.base.ChatList">
+    <select id="selectAll" resultType="com.scnu.entity.base.ChatList">
         select
         <include refid="Base_Column_List" />
         from chat_list
@@ -18,7 +18,7 @@
         order by id desc
     </select>
 
-    <select id="selectById" resultType="com.xzj.entity.base.ChatList">
+    <select id="selectById" resultType="com.scnu.entity.base.ChatList">
         select
         <include refid="Base_Column_List" />
         from chat_list
@@ -30,7 +30,7 @@
         where  id = #{id}
     </delete>
 
-    <insert id="insert" parameterType="com.xzj.entity.base.ChatList" useGeneratedKeys="true">
+    <insert id="insert" parameterType="com.scnu.entity.base.ChatList" useGeneratedKeys="true">
         insert into chat_list
         <trim prefix="(" suffix=")" suffixOverrides=",">
                 <if test="id != null">id,</if>
@@ -60,7 +60,7 @@
         </trim>
     </insert>
 
-    <update id="updateById" parameterType="com.xzj.entity.base.ChatList">
+    <update id="updateById" parameterType="com.scnu.entity.base.ChatList">
         update chat_list
         <set>
             <if test="productId != null">

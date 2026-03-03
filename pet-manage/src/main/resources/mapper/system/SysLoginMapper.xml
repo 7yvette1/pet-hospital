@@ -2,13 +2,13 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.xzj.mapper.system.SysLoginMapper">
+<mapper namespace="com.scnu.mapper.system.SysLoginMapper">
     <sql id="Base_Column_List">
         id,user_name,login_addr,login_time
     </sql>
 
 
-    <insert id="add" parameterType="com.xzj.entity.system.SysLogin" useGeneratedKeys="true">
+    <insert id="add" parameterType="com.scnu.entity.system.SysLogin" useGeneratedKeys="true">
         insert into sys_login
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">id,</if>
@@ -29,14 +29,14 @@
         where  id = #{id}
     </delete>
 
-    <select id="selectById" resultType="com.xzj.entity.system.SysLogin">
+    <select id="selectById" resultType="com.scnu.entity.system.SysLogin">
         select
         <include refid="Base_Column_List" />
         from sys_login
         where id = #{id}
     </select>
 
-    <select id="selectAll" resultType="com.xzj.entity.system.SysLogin">
+    <select id="selectAll" resultType="com.scnu.entity.system.SysLogin">
         select
         <include refid="Base_Column_List" />
         from sys_login

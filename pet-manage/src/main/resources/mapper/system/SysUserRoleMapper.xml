@@ -2,13 +2,13 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.xzj.mapper.system.SysUserRoleMapper">
+<mapper namespace="com.scnu.mapper.system.SysUserRoleMapper">
 
     <sql id="Base_Column_List">
         user_id,role_id
     </sql>
 
-    <insert id="add" parameterType="com.xzj.entity.system.SysUserRole">
+    <insert id="add" parameterType="com.scnu.entity.system.SysUserRole">
         insert into sys_user_role
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="userId != null">user_id,</if>
@@ -25,7 +25,7 @@
         where  user_id = #{userId}
     </delete>
 
-    <select id="selectByUserId" resultType="com.xzj.entity.system.SysUserRole">
+    <select id="selectByUserId" resultType="com.scnu.entity.system.SysUserRole">
         select
         <include refid="Base_Column_List" />
         from sys_user_role

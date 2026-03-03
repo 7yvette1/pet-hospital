@@ -2,12 +2,12 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.xzj.mapper.front.FrontUserMapper">
+<mapper namespace="com.scnu.mapper.front.FrontUserMapper">
     <sql id="Base_Column_List">
         user_id,user_name,nick_name,password,status,email,phone,sex,avatar,create_by,create_time,remark
     </sql>
 
-    <insert id="add" parameterType="com.xzj.entity.front.FrontUser" useGeneratedKeys="true">
+    <insert id="add" parameterType="com.scnu.entity.front.FrontUser" useGeneratedKeys="true">
         insert into front_user
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="userId != null">user_id,</if>
@@ -39,7 +39,7 @@
         </trim>
     </insert>
 
-    <update id="updateById" parameterType="com.xzj.entity.front.FrontUser">
+    <update id="updateById" parameterType="com.scnu.entity.front.FrontUser">
         update front_user
         <set>
             <if test="userName != null">
@@ -84,14 +84,14 @@
         where user_id = #{userId}
     </delete>
 
-    <select id="selectById" resultType="com.xzj.entity.front.FrontUser">
+    <select id="selectById" resultType="com.scnu.entity.front.FrontUser">
         select
         <include refid="Base_Column_List" />
         from front_user
         where user_id = #{userId}
     </select>
 
-    <select id="selectAll" resultType="com.xzj.entity.front.FrontUser">
+    <select id="selectAll" resultType="com.scnu.entity.front.FrontUser">
         select
         <include refid="Base_Column_List" />
         from front_user
@@ -104,14 +104,14 @@
         order by user_id
     </select>
 
-    <select id="selectByUserAndPassword" resultType="com.xzj.entity.front.FrontUser">
+    <select id="selectByUserAndPassword" resultType="com.scnu.entity.front.FrontUser">
         select
         <include refid="Base_Column_List" />
         from front_user
         where user_name = #{userName} and password = #{password}
     </select>
 
-    <update id="updatePassword" parameterType="com.xzj.entity.front.FrontUser">
+    <update id="updatePassword" parameterType="com.scnu.entity.front.FrontUser">
         update front_user
         <set>
             <if test="newPassword != null">

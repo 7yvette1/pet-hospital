@@ -10,7 +10,7 @@
         <relativePath/>
     </parent>
 
-    <groupId>com.xzj</groupId>
+    <groupId>com.scnu</groupId>
     <artifactId>pet-manage</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>pet-manage</name>

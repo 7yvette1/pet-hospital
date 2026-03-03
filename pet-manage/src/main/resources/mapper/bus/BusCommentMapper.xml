@@ -2,13 +2,13 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.xzj.mapper.bus.BusCommentMapper">
+<mapper namespace="com.scnu.mapper.bus.BusCommentMapper">
 
     <sql id="Base_Column_List">
         id,content,user_id,pid,root_id,time,fid,module
     </sql>
 
-    <select id="selectAll" resultType="com.xzj.entity.bus.BusComment">
+    <select id="selectAll" resultType="com.scnu.entity.bus.BusComment">
         select
         <include refid="Base_Column_List" />
         from bus_comment
@@ -18,7 +18,7 @@
         order by id desc
     </select>
 
-    <select id="selectOneAll" resultType="com.xzj.entity.bus.BusComment">
+    <select id="selectOneAll" resultType="com.scnu.entity.bus.BusComment">
         select comment.*, user.avatar, user.user_name as userName, u2.user_name as replyUser
         from bus_comment comment
         left join front_user user
@@ -31,14 +31,14 @@
         order by comment.id asc
     </select>
 
-    <select id="selectById" resultType="com.xzj.entity.bus.BusComment">
+    <select id="selectById" resultType="com.scnu.entity.bus.BusComment">
         select
         <include refid="Base_Column_List" />
         from bus_comment
         where id = #{id}
     </select>
 
-    <select id="selectTree" resultType="com.xzj.entity.bus.BusComment">
+    <select id="selectTree" resultType="com.scnu.entity.bus.BusComment">
         select comment.*, user.avatar, user.user_name as userName, u2.user_name as replyUser
         from bus_comment comment
         left join front_user user
@@ -56,7 +56,7 @@
         where  id = #{id}
     </delete>
 
-    <insert id="insert" parameterType="com.xzj.entity.bus.BusComment" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insert" parameterType="com.scnu.entity.bus.BusComment" useGeneratedKeys="true" keyProperty="id">
         insert into bus_comment
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">id,</if>
@@ -80,7 +80,7 @@
         </trim>
     </insert>
 
-    <update id="updateById" parameterType="com.xzj.entity.bus.BusComment">
+    <update id="updateById" parameterType="com.scnu.entity.bus.BusComment">
         update bus_comment
         <set>
             <if test="content != null">

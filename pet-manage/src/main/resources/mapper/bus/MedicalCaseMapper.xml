@@ -2,13 +2,13 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.xzj.mapper.bus.MedicalCaseMapper">
+<mapper namespace="com.scnu.mapper.bus.MedicalCaseMapper">
 
     <sql id="Base_Column_List">
         id,registerId,name,gender,age,phone,visitDate,doctorId,medicalInfo,diagnosis,adviceInfo
     </sql>
 
-    <select id="selectAll" resultType="com.xzj.entity.bus.MedicalCase">
+    <select id="selectAll" resultType="com.scnu.entity.bus.MedicalCase">
         select
         a.*,b.nick_name as docName
         from medical_case a
@@ -21,7 +21,7 @@
     </select>
 
 
-    <select id="selectMyPage" resultType="com.xzj.entity.bus.MedicalCase">
+    <select id="selectMyPage" resultType="com.scnu.entity.bus.MedicalCase">
         select
         a.*,b.nick_name as docName
         from medical_case a
@@ -34,7 +34,7 @@
         order by id
     </select>
 
-    <select id="selectById" resultType="com.xzj.entity.bus.MedicalCase">
+    <select id="selectById" resultType="com.scnu.entity.bus.MedicalCase">
         select
         <include refid="Base_Column_List" />
         from medical_case
@@ -46,7 +46,7 @@
         where  id = #{id}
     </delete>
 
-    <insert id="insert" parameterType="com.xzj.entity.bus.MedicalCase" useGeneratedKeys="true">
+    <insert id="insert" parameterType="com.scnu.entity.bus.MedicalCase" useGeneratedKeys="true">
         insert into medical_case
         <trim prefix="(" suffix=")" suffixOverrides=",">
                 <if test="id != null">id,</if>
@@ -76,7 +76,7 @@
         </trim>
     </insert>
 
-    <update id="updateById" parameterType="com.xzj.entity.bus.MedicalCase">
+    <update id="updateById" parameterType="com.scnu.entity.bus.MedicalCase">
         update medical_case
         <set>
             <if test="registerId != null">

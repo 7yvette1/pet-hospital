@@ -2,12 +2,12 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.xzj.mapper.system.SysMenuMapper">
+<mapper namespace="com.scnu.mapper.system.SysMenuMapper">
     <sql id="Base_Column_List">
         menu_id,route_name,menu_name,label,parent_id,order_num,path,component,menu_type,status,icon,create_by,create_time,remark
     </sql>
 
-    <insert id="add" parameterType="com.xzj.entity.system.SysMenu" useGeneratedKeys="true">
+    <insert id="add" parameterType="com.scnu.entity.system.SysMenu" useGeneratedKeys="true">
         insert into sys_menu
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="menuId != null">menu_id,</if>
@@ -43,7 +43,7 @@
         </trim>
     </insert>
 
-    <update id="updateById" parameterType="com.xzj.entity.system.SysMenu">
+    <update id="updateById" parameterType="com.scnu.entity.system.SysMenu">
         update sys_menu
         <set>
             <if test="routeName != null">
@@ -94,21 +94,21 @@
         where  menu_id = #{menuId}
     </delete>
 
-    <select id="selectById" resultType="com.xzj.entity.system.SysMenu">
+    <select id="selectById" resultType="com.scnu.entity.system.SysMenu">
         select
         <include refid="Base_Column_List" />
         from sys_menu
         where menu_id = #{menuId}
     </select>
 
-    <select id="selectByParentId" resultType="com.xzj.entity.system.SysMenu">
+    <select id="selectByParentId" resultType="com.scnu.entity.system.SysMenu">
         select
         <include refid="Base_Column_List" />
         from sys_menu
         where parent_id = #{parentId}
     </select>
 
-    <select id="selectAll" resultType="com.xzj.entity.system.SysMenu">
+    <select id="selectAll" resultType="com.scnu.entity.system.SysMenu">
         select
         <include refid="Base_Column_List" />
         from sys_menu
@@ -123,7 +123,7 @@
     </select>
 
     <!--查询用户权限-->
-    <select id="selectMenuList" resultType="com.xzj.entity.system.SysMenu">
+    <select id="selectMenuList" resultType="com.scnu.entity.system.SysMenu">
         select distinct m.*
         from sys_user u
         inner join sys_user_role ur on u.user_id = ur.user_id
@@ -138,7 +138,7 @@
         </if>
     </select>
 
-    <select id="selectDirMenuList" resultType="com.xzj.entity.system.SysMenuSimple">
+    <select id="selectDirMenuList" resultType="com.scnu.entity.system.SysMenuSimple">
         select distinct m.label, concat(m.menu_id, '') as menu_id, concat(m.parent_id, '') as parent_id
         from sys_menu m
         where m.menu_type = 'M' and m.status = '0'

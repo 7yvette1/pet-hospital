@@ -2,13 +2,13 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.xzj.mapper.bus.BusCategoryMapper">
+<mapper namespace="com.scnu.mapper.bus.BusCategoryMapper">
 
     <sql id="Base_Column_List">
         id,name,img,descr,content,service_type
     </sql>
 
-    <select id="selectAll" resultType="com.xzj.entity.bus.BusCategory">
+    <select id="selectAll" resultType="com.scnu.entity.bus.BusCategory">
         select
         <include refid="Base_Column_List" />
         from bus_category
@@ -21,7 +21,7 @@
     </select>
 
 
-    <select id="selectTop" resultType="com.xzj.entity.bus.BusCategory">
+    <select id="selectTop" resultType="com.scnu.entity.bus.BusCategory">
         select
         <include refid="Base_Column_List" />
         from bus_category
@@ -34,7 +34,7 @@
         limit 8
     </select>
 
-    <select id="selectById" resultType="com.xzj.entity.bus.BusCategory">
+    <select id="selectById" resultType="com.scnu.entity.bus.BusCategory">
         select
         <include refid="Base_Column_List" />
         from bus_category
@@ -46,7 +46,7 @@
         where  id = #{id}
     </delete>
 
-    <insert id="insert" parameterType="com.xzj.entity.bus.BusCategory" useGeneratedKeys="true">
+    <insert id="insert" parameterType="com.scnu.entity.bus.BusCategory" useGeneratedKeys="true">
         insert into bus_category
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">id,</if>
@@ -68,7 +68,7 @@
         </trim>
     </insert>
 
-    <update id="updateById" parameterType="com.xzj.entity.bus.BusCategory">
+    <update id="updateById" parameterType="com.scnu.entity.bus.BusCategory">
         update bus_category
         <set>
             <if test="name != null">

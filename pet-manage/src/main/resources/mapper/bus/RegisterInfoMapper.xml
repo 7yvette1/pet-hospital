@@ -2,13 +2,13 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.xzj.mapper.bus.RegisterInfoMapper">
+<mapper namespace="com.scnu.mapper.bus.RegisterInfoMapper">
 
     <sql id="Base_Column_List">
         id,clinic_id,user_id,doc_id,status,time,receive_id,receive_time
     </sql>
 
-    <select id="selectAll" resultType="com.xzj.entity.bus.RegisterInfo">
+    <select id="selectAll" resultType="com.scnu.entity.bus.RegisterInfo">
         select
         a.*,b.nick_name as userName
         from register_info a
@@ -21,7 +21,7 @@
         order by id
     </select>
 
-    <select id="selectAll1" resultType="com.xzj.entity.bus.RegisterInfo">
+    <select id="selectAll1" resultType="com.scnu.entity.bus.RegisterInfo">
         select t.*,b.name as clinicName,c.nick_name as userName from
         (select
         *
@@ -34,7 +34,7 @@
         order by id
     </select>
 
-    <select id="selectAll2" resultType="com.xzj.entity.bus.RegisterInfo">
+    <select id="selectAll2" resultType="com.scnu.entity.bus.RegisterInfo">
         select t.*,b.nick_name as userName,c.nick_name as docName from
         (select
         *
@@ -48,7 +48,7 @@
         order by id
     </select>
 
-    <select id="selectById" resultType="com.xzj.entity.bus.RegisterInfo">
+    <select id="selectById" resultType="com.scnu.entity.bus.RegisterInfo">
         select
         <include refid="Base_Column_List" />
         from register_info
@@ -60,7 +60,7 @@
         where  id = #{id}
     </delete>
 
-    <insert id="insert" parameterType="com.xzj.entity.bus.RegisterInfo" useGeneratedKeys="true">
+    <insert id="insert" parameterType="com.scnu.entity.bus.RegisterInfo" useGeneratedKeys="true">
         insert into register_info
         <trim prefix="(" suffix=")" suffixOverrides=",">
                 <if test="id != null">id,</if>
@@ -84,7 +84,7 @@
         </trim>
     </insert>
 
-    <update id="updateById" parameterType="com.xzj.entity.bus.RegisterInfo">
+    <update id="updateById" parameterType="com.scnu.entity.bus.RegisterInfo">
         update register_info
         <set>
             <if test="clinicId != null">
@@ -112,7 +112,7 @@
         where id = #{id} 
     </update>
 
-    <select id="selectRegisterApply" resultType="com.xzj.entity.bus.RegisterInfo">
+    <select id="selectRegisterApply" resultType="com.scnu.entity.bus.RegisterInfo">
         select *
         from register_info
         <where>

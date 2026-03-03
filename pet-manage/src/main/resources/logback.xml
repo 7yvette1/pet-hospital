@@ -65,7 +65,7 @@
 
 
     <!-- 系统模块日志级别控制  -->
-    <logger name="com.xzj" level="info" />
+    <logger name="com.scnu" level="info" />
     <!-- Spring日志级别控制  -->
     <logger name="org.springframework" level="warn" />
 

@@ -2,13 +2,13 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.xzj.mapper.bus.BusNewsMapper">
+<mapper namespace="com.scnu.mapper.bus.BusNewsMapper">
 
     <sql id="Base_Column_List">
         id,title,type,descr,content,cover,user,time
     </sql>
 
-    <select id="selectAll" resultType="com.xzj.entity.bus.BusNews">
+    <select id="selectAll" resultType="com.scnu.entity.bus.BusNews">
         select
         <include refid="Base_Column_List" />
         from bus_news
@@ -19,7 +19,7 @@
         order by id desc
     </select>
 
-    <select id="selectById" resultType="com.xzj.entity.bus.BusNews">
+    <select id="selectById" resultType="com.scnu.entity.bus.BusNews">
         select
         <include refid="Base_Column_List" />
         from bus_news
@@ -31,7 +31,7 @@
         where  id = #{id}
     </delete>
 
-    <insert id="insert" parameterType="com.xzj.entity.bus.BusNews" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insert" parameterType="com.scnu.entity.bus.BusNews" useGeneratedKeys="true" keyProperty="id">
         insert into bus_news
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">id,</if>
@@ -55,7 +55,7 @@
         </trim>
     </insert>
 
-    <update id="updateById" parameterType="com.xzj.entity.bus.BusNews">
+    <update id="updateById" parameterType="com.scnu.entity.bus.BusNews">
         update bus_news
         <set>
             <if test="title != null">
@@ -83,7 +83,7 @@
         where id = #{id}
     </update>
 
-    <select id="selectTopNews" resultType="com.xzj.entity.bus.BusNews">
+    <select id="selectTopNews" resultType="com.scnu.entity.bus.BusNews">
         select
         <include refid="Base_Column_List" />
         from bus_news order by time desc

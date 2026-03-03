@@ -2,13 +2,13 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.xzj.mapper.base.BaseNoticeMapper">
+<mapper namespace="com.scnu.mapper.base.BaseNoticeMapper">
 
     <sql id="Base_Column_List">
         id,title,content,time,user
     </sql>
 
-    <select id="selectAll" resultType="com.xzj.entity.base.BaseNotice">
+    <select id="selectAll" resultType="com.scnu.entity.base.BaseNotice">
         select
         <include refid="Base_Column_List" />
         from base_notice
@@ -22,7 +22,7 @@
         order by id desc
     </select>
 
-    <select id="selectById" resultType="com.xzj.entity.base.BaseNotice">
+    <select id="selectById" resultType="com.scnu.entity.base.BaseNotice">
         select
         <include refid="Base_Column_List" />
         from base_notice
@@ -34,7 +34,7 @@
         where  id = #{id}
     </delete>
 
-    <insert id="insert" parameterType="com.xzj.entity.base.BaseNotice" useGeneratedKeys="true">
+    <insert id="insert" parameterType="com.scnu.entity.base.BaseNotice" useGeneratedKeys="true">
         insert into base_notice
         <trim prefix="(" suffix=")" suffixOverrides=",">
                 <if test="id != null">id,</if>
@@ -52,7 +52,7 @@
         </trim>
     </insert>
 
-    <update id="updateById" parameterType="com.xzj.entity.base.BaseNotice">
+    <update id="updateById" parameterType="com.scnu.entity.base.BaseNotice">
         update base_notice
         <set>
             <if test="title != null">

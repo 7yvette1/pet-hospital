@@ -29,11 +29,16 @@
                 <el-table-column prop="userName" label="用户名" align="center" width="150"></el-table-column>
                 <el-table-column prop="nickName" label="姓名" align="center" width="150"></el-table-column>
                 <el-table-column prop="roleNameList" label="用户角色" align="center" width="150">
-                    <template slot-scope="scope">
-                        <div slot="reference" class="name-wrapper" width="150">
-                            <el-tag size="mini" v-for="roleName of scope.row.roleNameList">{{ roleName }}</el-tag>
-                        </div>
-                    </template>
+                  <template slot-scope="scope">
+                    <div class="name-wrapper">
+                      <el-tag
+                          size="mini"
+                          v-for="roleName in scope.row.roleNameList"
+                          :key="roleName">
+                        {{ roleName }}
+                      </el-tag>
+                    </div>
+                  </template>
                 </el-table-column>
                 <el-table-column prop="status" label="账号状态" align="center" width="150">
                     <template slot-scope="scope">
