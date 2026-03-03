@@ -22,16 +22,19 @@
     </div>
 
     <div>
-      <el-row :gutter="10">
+      <el-row :gutter="20">
         <el-col :span="6" v-for="item in newsInfoList" :key="item.id">
           <div
-              style="margin-bottom: 10px; cursor: pointer;"
+              class="category-card"
               @click="$router.push('/front/busCategoryDetail?id=' + item.id)"
           >
-            <img :src="item.img" alt="" style="width: 100%; height: 190px; display: block; border-radius: 5px 5px 0 0;">
-            <div style="padding: 10px; background-color: #fff; box-shadow: -3px 3px 3px -2px rgba(0,0,0,0.1), 3px 3px 3px -2px rgba(0,0,0,0.1);">
-              <div class="line2" style="height: 20px; margin-bottom: 5px; text-align: center">
-                <el-tag>{{ item.name }}</el-tag>
+            <img :src="item.img" alt="" class="category-img">
+
+            <div class="category-body">
+              <div class="category-title">
+                <el-tag type="success" effect="light">
+                  {{ item.name }}
+                </el-tag>
               </div>
             </div>
           </div>
@@ -100,76 +103,35 @@ export default {
 </script>
 
 <style scoped>
+.category-card {
+  margin-bottom: 20px;
+  cursor: pointer;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.category-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+.category-img {
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+  display: block;
+}
+
+.category-body {
+  padding: 15px;
+  text-align: center;
+}
+
+.category-title {
+  font-size: 16px;
+  font-weight: 600;
+}
 </style>
-
-<!--
-<template>
-    <div class="main-content">
-        <div>
-            <el-row :gutter="10">
-                <el-col :span="6" v-for="item in newsInfoList" :key="item.id">
-                    <div style="margin-bottom: 10px; cursor: pointer;" @click="$router.push('/front/busCategoryDetail?id=' + item.id)">
-                        <img :src="item.img" alt="" style="width: 100%; height: 190px; display: block; border-radius: 5px 5px 0 0;">
-                        <div style="padding: 10px; background-color: #fff; box-shadow: -3px 3px 3px -2px rgba(0,0,0,0.1), 3px 3px 3px -2px rgba(0,0,0,0.1);">
-                            <div class="line2" style="height: 20px; margin-bottom: 5px; text-align: center">
-                                <el-tag>{{ item.name }}</el-tag>
-                            </div>
-                        </div>
-                    </div>
-                </el-col>
-            </el-row>
-        </div>
-
-        <div style="margin: 10px 0" v-if="total">
-            <el-pagination
-                    background
-                    @current-change="handleCurrentChange"
-                    :current-page="pageNum"
-                    :page-size="pageSize"
-                    layout="total, prev, pager, next"
-                    :total="total">
-            </el-pagination>
-        </div>
-
-    </div>
-</template>
-
-<script>
-    export default {
-        name: "BusCategory",
-        data() {
-            return {
-                newsInfoList: [],
-                pageNum: 1,
-                pageSize: 8,
-                total: 0,
-                serviceType: ''   //  服务类型
-            }
-        },
-        created() {
-            this.load(1)
-        },
-        methods: {
-            load(pageNum) {  // 分页查询
-                if (pageNum) this.pageNum = pageNum
-                this.$request.get('/front/buscategory/selectPage', {
-                    params: {
-                        pageNum: this.pageNum,
-                        pageSize: this.pageSize,
-                    }
-                }).then(res => {
-                    this.newsInfoList = res.data?.list
-                    this.total = res.data?.total
-                })
-            },
-            handleCurrentChange(pageNum) {
-                this.load(pageNum)
-            },
-        }
-    }
-</script>
-
-<style scoped>
-
-</style>
--->

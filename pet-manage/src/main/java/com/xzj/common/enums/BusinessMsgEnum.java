@@ -25,7 +25,11 @@ public enum BusinessMsgEnum {
 
     FROMUSERID_CODE_ERROR("5006", "发送用户不存在！"),
 
-    TOUSERID_CODE_ERROR("5007", "接收用户不存在！");
+    TOUSERID_CODE_ERROR("5007", "接收用户不存在！"),
+
+    PHONE_EMPTY("5008", "手机号不能为空！"),
+
+    REGISTER_INFO_EMPTY("5009", "信息填写不完整！");
 
 
 

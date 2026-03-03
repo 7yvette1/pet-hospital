@@ -4,10 +4,6 @@ import lombok.Data;
 
 import java.io.Serializable;
 
-/**
- * @author xuzhijun
- * @date 2024年08月15日 16:58
- */
 @Data
 public class FrontUser implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -27,4 +23,5 @@ public class FrontUser implements Serializable {
 
     private String token;
     private String newPassword;
+    private String code;
 }

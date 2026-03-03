@@ -2,19 +2,24 @@
     <div class="main-content">
         <div>
             <el-row :gutter="10">
-                <el-col :span="6" v-for="item in newsInfoList" :key="item.userId">
-                    <div style="margin-bottom: 10px; cursor: pointer;" @click="$router.push('/front/sysDocDetail?id=' + item.userId)">
-                        <img :src="item.avatar" alt="" style="width: 100%; height: 220px; display: block; border-radius: 5px 5px 0 0;">
-                        <div style="padding: 10px; background-color: #fff; box-shadow: -3px 3px 3px -2px rgba(0,0,0,0.1), 3px 3px 3px -2px rgba(0,0,0,0.1);">
-                            <div class="line2" style="height: 20px; margin-bottom: 5px; text-align: center">
-                                <el-tag>{{ item.nickName }}</el-tag>
-                            </div>
-                            <div class="line2" style="height: 50px; margin-bottom: 5px; text-align: center">
-                                {{ item.descr }}
-                            </div>
-                        </div>
+              <el-col :span="6" v-for="item in newsInfoList" :key="item.userId">
+                <div class="doctor-card"
+                     @click="$router.push('/front/sysDocDetail?id=' + item.userId)">
+
+                  <img :src="item.avatar" class="doctor-img">
+
+                  <div class="doctor-body">
+                    <div class="doctor-name">
+                      <el-tag>{{ item.nickName }}</el-tag>
                     </div>
-                </el-col>
+
+                    <div class="doctor-desc">
+                      {{ item.descr }}
+                    </div>
+                  </div>
+
+                </div>
+              </el-col>
             </el-row>
         </div>
 
@@ -67,5 +72,57 @@
 </script>
 
 <style scoped>
+.main-content {
+  padding: 20px 0;
+}
+
+.doctor-card {
+  margin-bottom: 20px;
+  cursor: pointer;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: all 0.3s;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.doctor-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+}
+
+.doctor-img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.doctor-body {
+  padding: 15px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.doctor-name {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.doctor-desc {
+  font-size: 14px;
+  color: #666;
+  line-height: 22px;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 3;   /* 最多3行 */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
 
 </style>
+

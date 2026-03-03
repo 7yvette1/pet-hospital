@@ -28,7 +28,7 @@
                 </div>
             </div>
 
-            <!-- 诊疗服务 -->
+            <!-- 宠物服务 -->
             <section class="services-section">
                 <div class="container">
                     <div class="section-title">
@@ -43,8 +43,10 @@
                                 <div class="service-image">
                                     <img :src="service.img" :alt="service.name" class="service-img" />
                                 </div>
+                                <div class="service-body">
                                 <h3 class="service-title">{{ service.name }}</h3>
                                 <p class="service-desc">{{ service.descr }}</p>
+                                </div>
                                 <el-button type="text" class="more-btn" @click="$router.push('/front/busCategoryDetail?id=' + service.id)">详情 <i class="el-icon-arrow-right"></i></el-button>
                             </el-card>
                         </el-col>
@@ -258,7 +260,7 @@
         padding: 0 15px;
     }
 
-    .service-desc {
+    /*.service-desc {
         color: #666;
         margin-bottom: 20px;
         padding: 0 15px;
@@ -266,6 +268,28 @@
         display: flex;
         align-items: center;
         justify-content: center;
+    }*/
+    .service-body {
+      flex: 1;
+      padding: 0 15px;
+    }
+
+    .service-title {
+      font-size: 18px;
+      margin: 20px 0 10px;
+      height: 50px;              /* 固定标题高度 */
+      overflow: hidden;
+    }
+
+    .service-desc {
+      color: #666;
+      font-size: 14px;
+      line-height: 22px;
+
+      display: -webkit-box;
+      -webkit-line-clamp: 2;     /* 最多2行 */
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
 
     .more-btn {
