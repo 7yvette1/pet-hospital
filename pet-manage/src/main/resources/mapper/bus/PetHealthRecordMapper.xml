@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.scnu.mapper.bus.PetHealthRecordMapper">
+
+<resultMap id="BaseResultMap" type="com.scnu.entity.bus.PetHealthRecord">
+    <id column="id" property="id"/>
+    <result column="pet_name" property="petName"/>
+    <result column="pet_type" property="petType"/>
+    <result column="pet_gender" property="petGender"/>
+    <result column="pet_age" property="petAge"/>
+    <result column="weight" property="weight"/>
+    <result column="vaccine_record" property="vaccineRecord"/>
+    <result column="health_status" property="healthStatus"/>
+    <result column="create_time" property="createTime"/>
+    <result column="user_id" property="userId"/>
+</resultMap>
+
+<insert id="insert">
+    INSERT INTO pet_health_record
+    (pet_name, pet_type, pet_gender, pet_age, weight, vaccine_record,
+    health_status, create_time, user_id)
+    VALUES
+    (#{petName}, #{petType},#{petGender}, #{petAge}, #{weight},
+    #{vaccineRecord}, #{healthStatus},
+    NOW(), #{userId})
+</insert>
+
+<delete id="deleteById">
+    DELETE FROM pet_health_record WHERE id = #{id}
+</delete>
+
+<update id="updateById">
+    UPDATE pet_health_record
+    SET
+    pet_name = #{petName},
+    pet_type = #{petType},
+    pet_gender = #{petGender},
+    pet_age = #{petAge},
+    weight = #{weight},
+    vaccine_record = #{vaccineRecord},
+    health_status = #{healthStatus}
+    WHERE id = #{id}
+</update>
+
+<select id="selectById" resultMap="BaseResultMap">
+    SELECT * FROM pet_health_record WHERE id = #{id}
+</select>
+
+<select id="selectAll" resultMap="BaseResultMap">
+    SELECT * FROM pet_health_record
+</select>
+
+<select id="selectMyPage" resultMap="BaseResultMap">
+    SELECT * FROM pet_health_record
+    WHERE user_id = #{userId}
+    ORDER BY create_time DESC
+</select>
+
+</mapper>

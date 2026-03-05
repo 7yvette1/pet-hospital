@@ -260,15 +260,6 @@
         padding: 0 15px;
     }
 
-    /*.service-desc {
-        color: #666;
-        margin-bottom: 20px;
-        padding: 0 15px;
-        flex-grow: 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }*/
     .service-body {
       flex: 1;
       padding: 0 15px;

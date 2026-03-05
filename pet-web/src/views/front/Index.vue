@@ -16,10 +16,6 @@
                         <el-menu-item index="/front/busCategory">宠物服务</el-menu-item>
 
                         <el-menu-item index="/front/sysDoc">服务团队</el-menu-item>
-                          <!--
-                          <el-menu-item index="/front/new">诊所资讯</el-menu-item>
-                          <el-menu-item index="/front/new1">康复故事</el-menu-item>
-                          -->
                           <el-menu-item index="/front/forum">宠物社区</el-menu-item>
                           <el-menu-item index="/front/ai">AI问诊</el-menu-item>
                           <el-menu-item index="/front/aboutUs">关于我们</el-menu-item>
@@ -42,6 +38,9 @@
                             </div>
                         </div>
                         <el-dropdown-menu slot="dropdown">
+                            <el-dropdown-item>
+                              <div @click="$router.push('/front/myPetHealth')">宠物健康档案</div>
+                            </el-dropdown-item>
                             <el-dropdown-item>
                                 <div @click="$router.push('/front/myRegistInfo')">我的预约记录</div>
                             </el-dropdown-item>

@@ -8,7 +8,7 @@
                         {{ scope.$index + 1 }}
                     </template>
                 </el-table-column>
-                <el-table-column prop="name" label="物姓名" align="center" show-overflow-tooltip></el-table-column>
+                <el-table-column prop="name" label="宠物姓名" align="center" show-overflow-tooltip></el-table-column>
                 <el-table-column prop="gender" label="患物性别" align="center" width="150">
                     <template slot-scope="scope">
                         <div slot="reference" class="name-wrapper">
