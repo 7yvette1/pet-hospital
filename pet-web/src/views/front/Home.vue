@@ -15,7 +15,7 @@
                                 <div class="carousel-text" v-if="index === 1">
                                     <h2>24小时服务</h2>
                                     <p>全年无休，为您的爱宠提供及时专业的智慧服务</p>
-                                    <el-button type="primary" size="large" class="btn-emergency" @click="$router.push('/front/busCategory')">预约服务</el-button>
+                                    <el-button type="primary" size="large" class="btn-emergency" @click="$router.push('/front/busCategory')">订购服务</el-button>
                                 </div>
                                 <div class="carousel-text" v-if="index === 2">
                                     <h2>专业服务团队</h2>

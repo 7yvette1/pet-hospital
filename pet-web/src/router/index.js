@@ -65,7 +65,7 @@ export default new VueRouter({
                 { path: 'sysDoc', meta: { name: '医疗团队' }, component: () => import('../views/front/bus/SysDoc') },
                 { path: 'sysDocDetail', meta: { name: '医疗团队详情' }, component: () => import('../views/front/bus/SysDocDetail') },
                 { path: 'myPetHealth', meta: { name: '宠物健康档案' }, component: () => import('../views/front/bus/MyPetHealth') },
-                { path: 'myRegistInfo', meta: { name: '我的预约信息' }, component: () => import('../views/front/bus/MyRegistInfo') },
+                { path: 'myRegistInfo', meta: { name: '我的订购信息' }, component: () => import('../views/front/bus/MyRegistInfo') },
                 { path: 'myMedicalCase', meta: { name: '宠物病历信息' }, component: () => import('../views/front/bus/MyMedicalCase') },
             ]
         },

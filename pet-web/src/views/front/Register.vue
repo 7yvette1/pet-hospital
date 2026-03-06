@@ -27,37 +27,18 @@
           <el-input prefix-icon="el-icon-phone" placeholder="请输入电话" v-model="form.phone"/>
         </el-form-item>
 
-        <!-- 新增验证码 -->
+        <!-- 验证码 -->
         <el-form-item prop="code" label="验证码:">
           <div style="display: flex">
-            <el-input
-                placeholder="请输入验证码"
-                v-model="form.code"
-                style="flex: 1"/>
-            <el-button
-                style="margin-left: 10px"
-                :disabled="countdown > 0"
-                @click="sendCode">
+            <el-input placeholder="请输入验证码" v-model="form.code" style="flex: 1"/>
+            <el-button style="margin-left: 10px" :disabled="countdown > 0" @click="sendCode">
               {{ countdown > 0 ? countdown + 's' : '获取验证码' }}
             </el-button>
           </div>
         </el-form-item>
 
-        <el-form-item prop="email" label="邮箱:">
-          <el-input prefix-icon="el-icon-message" placeholder="请输入邮箱" v-model="form.email"/>
-        </el-form-item>
-
-        <el-form-item label="性别:">
-          <el-radio-group v-model="form.sex">
-            <el-radio label="0">男</el-radio>
-            <el-radio label="1">女</el-radio>
-          </el-radio-group>
-        </el-form-item>
-
         <el-form-item>
-          <el-button
-              style="width: 100%; background-color: #333; border-color: #333; color: white"
-              @click="register">
+          <el-button style="width: 100%; background-color: #333; border-color: #333; color: white" @click="register">
             注 册
           </el-button>
         </el-form-item>
@@ -78,7 +59,6 @@
 export default {
   name: "Register",
   data() {
-
     const validatePassword = (rule, confirmPass, callback) => {
       if (!confirmPass) {
         callback(new Error('请确认密码'))
@@ -92,6 +72,7 @@ export default {
     return {
       form: {},
       countdown: 0,
+      timer: null,
       rules: {
         userName: [{ required: true, message: '请输入账号', trigger: 'blur' }],
         nickName: [{ required: true, message: '请输入昵称', trigger: 'blur' }],
@@ -108,57 +89,58 @@ export default {
 
   methods: {
 
-    // 发送验证码
+    // 发送短信认证服务验证码
     sendCode() {
-
       if (!this.form.phone) {
-        this.$message.error("请输入手机号")
-        return
+        this.$message.error("请输入手机号");
+        return;
       }
 
-      this.$request.post('/front/sendCode', {
-        phone: this.form.phone
-      }).then(res => {
+      this.$request.post('/front/sendCode', { phone: this.form.phone })
+          .then(res => {
+            if (res.code === '200') {
+              this.$message.success("验证码已发送");
 
-        if (res.code === '200') {
+              this.countdown = 60;
+              this.timer = setInterval(() => {
+                this.countdown--;
+                if (this.countdown <= 0) {
+                  clearInterval(this.timer);
+                }
+              }, 1000);
 
-          this.$message.success("验证码已发送")
-
-          this.countdown = 60
-
-          let timer = setInterval(() => {
-            this.countdown--
-            if (this.countdown <= 0) {
-              clearInterval(timer)
+            } else {
+              this.$message.error(res.msg);
             }
-          }, 1000)
-
-        } else {
-          this.$message.error(res.msg)
-        }
-      })
+          })
+          .catch(err => {
+            this.$message.error("验证码发送异常");
+          });
     },
 
     // 注册
     register() {
-
       this.$refs['formRef'].validate((valid) => {
-
         if (valid) {
-
-          this.$request.post('/front/register', this.form).then(res => {
-
-            if (res.code === '200') {
-              this.$message.success('注册成功')
-              this.$router.push('/front/login')
-            } else {
-              this.$message.error(res.msg)
-            }
-
-          })
+          this.$request.post('/front/register', this.form)
+              .then(res => {
+                if (res.code === '200') {
+                  this.$message.success('注册成功');
+                  this.$router.push('/front/login');
+                } else {
+                  this.$message.error(res.msg);
+                }
+              })
+              .catch(err => {
+                this.$message.error("注册异常");
+              });
         }
-      })
+      });
     }
+  },
+
+  beforeUnmount() {
+    if (this.timer) clearInterval(this.timer);
   }
 }
 </script>

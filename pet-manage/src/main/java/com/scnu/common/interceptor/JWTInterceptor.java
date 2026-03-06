@@ -15,18 +15,35 @@ public class JWTInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        //获取请求头中令牌
+
+        // 获取请求路径
+        String uri = request.getRequestURI();
+
+        /**
+         * 放行接口（不需要token）
+         */
+        if (uri.contains("/login")
+                || uri.contains("/register")
+                || uri.contains("/front/sendCode")
+                || uri.contains("/error")) {
+            return true;
+        }
+
+        // 获取请求头 token
         String token = request.getHeader("token");
+
         if (ObjectUtil.isEmpty(token)) {
             throw new BusinessErrorException(BusinessMsgEnum.TOKEN_INVALID_ERROR);
         }
 
         try {
-            JWTUtils.verify(token);//验证令牌
-        } catch (Exception e){
+            // 验证 token
+            JWTUtils.verify(token);
+        } catch (Exception e) {
             e.printStackTrace();
             throw new BusinessErrorException(BusinessMsgEnum.TOKEN_INVALID_ERROR);
         }
-        return true;//放行请求
+
+        return true; // 放行
     }
 }

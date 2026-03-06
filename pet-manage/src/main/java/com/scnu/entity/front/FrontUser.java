@@ -20,7 +20,6 @@ public class FrontUser implements Serializable {
     private String createBy;
     private String createTime;
     private String remark;
-
     private String token;
     private String newPassword;
     private String code;

@@ -42,7 +42,7 @@
                               <div @click="$router.push('/front/myPetHealth')">宠物健康档案</div>
                             </el-dropdown-item>
                             <el-dropdown-item>
-                                <div @click="$router.push('/front/myRegistInfo')">我的预约记录</div>
+                                <div @click="$router.push('/front/myRegistInfo')">我的订单管理</div>
                             </el-dropdown-item>
                             <el-dropdown-item>
                                 <div @click="$router.push('/front/myMedicalCase')">宠物病例信息</div>

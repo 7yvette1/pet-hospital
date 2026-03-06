@@ -1,9 +1,9 @@
 <template>
     <div>
         <div class="search">
-            <el-select v-model="status" placeholder="请选择预约状态">
-                <el-option key="已预约" label="已预约" value="已预约"/>
-                <el-option key="已接诊" label="已接诊" value="已接诊"/>
+            <el-select v-model="status" placeholder="请选择订购状态">
+                <el-option key="已订购" label="已订购" value="已订购"/>
+                <el-option key="已确定" label="已确定" value="已确定"/>
                 <el-option key="已完成" label="已完成" value="已完成"/>
             </el-select>
             <el-button type="primary" icon="el-icon-search" style="margin-left: 10px" @click="load(1)">查询</el-button>
@@ -20,14 +20,14 @@
                     </template>
                 </el-table-column>
                 <el-table-column prop="id" label="序号" width="80" align="center" v-if="showId"></el-table-column>
-                <el-table-column prop="userName" label="预约用户" align="center" show-overflow-tooltip></el-table-column>
-                <el-table-column prop="clinicName" label="预约服务" align="center" show-overflow-tooltip></el-table-column>
-                <el-table-column prop="docName" label="预约医生" align="center" show-overflow-tooltip></el-table-column>
-                <el-table-column prop="status" label="预约状态" align="center" show-overflow-tooltip></el-table-column>
+                <el-table-column prop="userName" label="订购用户" align="center" show-overflow-tooltip></el-table-column>
+                <el-table-column prop="clinicName" label="订购服务" align="center" show-overflow-tooltip></el-table-column>
+                <el-table-column prop="docName" label="服务人员" align="center" show-overflow-tooltip></el-table-column>
+                <el-table-column prop="status" label="订购状态" align="center" show-overflow-tooltip></el-table-column>
 
                 <el-table-column label="操作" width="180" align="center">
                     <template v-slot="scope">
-                        <el-button v-if="scope.row.status == '已接诊'" plain type="primary" @click="makeInfo(scope.row.id)" size="mini">登记病历信息</el-button>
+                        <el-button v-if="scope.row.status == '已确定'" plain type="primary" @click="makeInfo(scope.row.id)" size="mini">登记病历信息</el-button>
                     </template>
                 </el-table-column>
             </el-table>

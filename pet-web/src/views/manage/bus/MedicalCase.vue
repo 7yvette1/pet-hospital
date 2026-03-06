@@ -31,7 +31,7 @@
                 <el-table-column prop="age" label="宠物年龄" align="center" show-overflow-tooltip></el-table-column>
                 <el-table-column prop="phone" label="联系电话" align="center" show-overflow-tooltip></el-table-column>
                 <el-table-column prop="visitDate" label="就诊日期" align="center" show-overflow-tooltip></el-table-column>
-                <el-table-column prop="docName" label="接诊医生" align="center" show-overflow-tooltip></el-table-column>
+                <el-table-column prop="docName" label="服务人员" align="center" show-overflow-tooltip></el-table-column>
                 <el-table-column prop="medicalInfo" label="病因" align="center" show-overflow-tooltip></el-table-column>
                 <el-table-column prop="diagnosis" label="诊断记录" align="center" show-overflow-tooltip></el-table-column>
                 <el-table-column prop="adviceInfo" label="医嘱" align="center" show-overflow-tooltip></el-table-column>

@@ -29,7 +29,10 @@ public enum BusinessMsgEnum {
 
     PHONE_EMPTY("5008", "手机号不能为空！"),
 
-    REGISTER_INFO_EMPTY("5009", "信息填写不完整！");
+    REGISTER_INFO_EMPTY("5009", "信息填写不完整！"),
+
+    SMS_SEND_LIMIT("5010", "请60秒后再获取验证码"),
+    SMS_SEND_ERROR("5011", "验证码验证失败");
 
 
 

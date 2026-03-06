@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="search">
-            <el-input placeholder="请输入预约名称查询" style="width: 200px" v-model="clinicName"></el-input>
+            <el-input placeholder="请输入订购名称查询" style="width: 200px" v-model="clinicName"></el-input>
             <el-button type="primary" icon="el-icon-search" style="margin-left: 10px" @click="load(1)">查询</el-button>
             <el-button type="warning" icon="el-icon-refresh" style="margin-left: 10px" @click="reset">重置</el-button>
         </div>
@@ -20,14 +20,14 @@
                     </template>
                 </el-table-column>
                 <el-table-column prop="id" label="序号" width="80" align="center" v-if="showId"></el-table-column>
-                <el-table-column prop="userName" label="预约用户" align="center" show-overflow-tooltip></el-table-column>
-                <el-table-column prop="clinicName" label="预约服务" align="center" show-overflow-tooltip></el-table-column>
-                <el-table-column prop="status" label="预约状态" align="center" show-overflow-tooltip></el-table-column>
-                <el-table-column prop="time" label="预约时间" align="center" show-overflow-tooltip></el-table-column>
+                <el-table-column prop="userName" label="订购用户" align="center" show-overflow-tooltip></el-table-column>
+                <el-table-column prop="clinicName" label="订购服务" align="center" show-overflow-tooltip></el-table-column>
+                <el-table-column prop="status" label="订购状态" align="center" show-overflow-tooltip></el-table-column>
+                <el-table-column prop="time" label="订购时间" align="center" show-overflow-tooltip></el-table-column>
 
                 <el-table-column label="操作" width="180" align="center">
                     <template v-slot="scope">
-                        <el-button v-if="scope.row.status == '已预约'" plain type="primary" @click="handleEdit(scope.row.id)" size="mini">接诊</el-button>
+                        <el-button v-if="scope.row.status == '已订购'" plain type="primary" @click="handleEdit(scope.row.id)" size="mini">服务</el-button>
                         <el-button plain type="danger" size="mini" @click=del(scope.row.id)>删除</el-button>
                     </template>
                 </el-table-column>
@@ -79,9 +79,9 @@
             handleEdit(id){
                 let data = {
                     id: id,
-                    status: "已接诊",
+                    status: "已确定",
                 }
-                this.$confirm('您确定接诊吗？', '确认接诊', {type: "success"}).then(response => {
+                this.$confirm('您确定服务吗？', '确认服务', {type: "success"}).then(response => {
                     this.$request({
                         url:  '/registerInfo/updateStatus',
                         method: 'PUT',

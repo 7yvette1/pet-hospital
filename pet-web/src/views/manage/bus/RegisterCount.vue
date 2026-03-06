@@ -31,7 +31,7 @@
             var lineAndBarOption = {
                 color: ['#80FFA5'],
                 title: {
-                    text: '预约申请统计曲线图'
+                    text: '订购申请统计曲线图'
                 },
                 tooltip: {
                     trigger: 'axis',
@@ -114,7 +114,7 @@
             // 饼图
             var pieOption = {
                 title : {
-                    text: '预约状态统计',
+                    text: '订购状态统计',
                     x:'center'
                 },
                 tooltip : {

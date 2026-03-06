@@ -30,7 +30,7 @@
                         </dl>
                     </div>
                     <div style="margin-top: 30px; margin-left: 18px">
-                        <el-button style="margin-left: 10px" type="primary" size="medium" @click="addOrder">预约挂号</el-button>
+                        <el-button style="margin-left: 10px" type="primary" size="medium" @click="addOrder">订购挂号</el-button>
                     </div>
                 </div>
             </div>
@@ -84,12 +84,12 @@
                 let data = {
                     userId: this.user.userId,
                     docId: this.id,
-                    status: "已预约",
+                    status: "已订购",
                 }
-                this.$confirm('您确定挂号吗？', '确定挂号', {type: "success"}).then(response => {
+                this.$confirm('您确定订购吗？', '确定订购', {type: "success"}).then(response => {
                     this.$request.post('/front/registerInfo/add', data).then(res => {
                         if (res.code === '200') {
-                            this.$message.success('预约成功！')
+                            this.$message.success('订购成功！')
                         } else {
                             this.$message.error(res.msg)
                         }
