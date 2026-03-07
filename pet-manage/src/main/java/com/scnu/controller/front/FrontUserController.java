@@ -112,5 +112,30 @@ public class FrontUserController {
         return Result.success("注册成功");
     }
 
-    // 其他 CRUD 或查询方法可以保留原有逻辑
+        /**
+     * 根据ID查询用户信息
+     */
+    @GetMapping("/selectById/{id}")
+    public Result selectById(@PathVariable Integer id) {
+        FrontUser user = frontUserService.selectById(id);
+        return Result.success(user);
+    }
+
+    /**
+     * 修改用户信息
+     */
+    @PutMapping("/updateById")
+    public Result updateById(@RequestBody FrontUser frontUser) {
+        frontUserService.updateById(frontUser);
+        return Result.success();
+    }
+
+    /**
+     * 修改密码
+     */
+    @PutMapping("/updatePassword")
+    public Result updatePassword(@RequestBody FrontUser frontUser) {
+        frontUserService.updatePassword(frontUser);
+        return Result.success();
+    }
 }

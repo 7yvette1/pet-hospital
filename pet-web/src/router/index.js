@@ -62,6 +62,7 @@ export default new VueRouter({
                 { path: 'busNewsDetail', meta: { name: '新闻资讯' }, component: () => import('../views/front/bus/BusNewsDetail') },
                 { path: 'busCategory', meta: { name: '诊所服务' }, component: () => import('../views/front/bus/BusCategory') },
                 { path: 'busCategoryDetail', meta: { name: '诊所服务详情' }, component: () => import('../views/front/bus/BusCategoryDetail') },
+                { path: 'registerInfo', meta: { name: '订单信息' }, component: () => import('../views/front/bus/RegisterInfo') },
                 { path: 'sysDoc', meta: { name: '医疗团队' }, component: () => import('../views/front/bus/SysDoc') },
                 { path: 'sysDocDetail', meta: { name: '医疗团队详情' }, component: () => import('../views/front/bus/SysDocDetail') },
                 { path: 'myPetHealth', meta: { name: '宠物健康档案' }, component: () => import('../views/front/bus/MyPetHealth') },
