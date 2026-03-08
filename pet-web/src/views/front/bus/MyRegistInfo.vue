@@ -45,11 +45,7 @@
             label="序号"
             width="70"
             align="center"
-        >
-          <template slot-scope="scope">
-            {{ scope.$index + 1 }}
-          </template>
-        </el-table-column>
+        />
 
 
         <el-table-column
@@ -78,35 +74,19 @@
         />
 
 
+        <!-- 状态 -->
         <el-table-column
-            prop="status"
             label="订购状态"
             align="center"
         >
 
           <template slot-scope="scope">
-
-            <el-tag
-                v-if="scope.row.status==='已订购'"
-                type="success"
-            >
-              已订购
-            </el-tag>
-
-            <el-tag
-                v-else-if="scope.row.status==='待审核'"
-                type="warning"
-            >
-              待审核
-            </el-tag>
-
-            <el-tag
-                v-else
-                type="danger"
-            >
-              已取消
-            </el-tag>
-
+            <el-tag v-if="scope.row.status=='0'" type="warning">待支付</el-tag>
+            <el-tag v-if="scope.row.status=='1'" type="primary">已支付</el-tag>
+            <el-tag v-if="scope.row.status=='2'" type="info">已接单</el-tag>
+            <el-tag v-if="scope.row.status=='3'">服务中</el-tag>
+            <el-tag v-if="scope.row.status=='4'" type="success">已完成</el-tag>
+            <el-tag v-if="scope.row.status=='5'" type="danger">已取消</el-tag>
           </template>
 
         </el-table-column>
@@ -122,20 +102,37 @@
         <!-- 操作 -->
         <el-table-column
             label="操作"
-            width="120"
+            width="220"
             align="center"
         >
 
           <template slot-scope="scope">
 
             <el-button
+                v-if="scope.row.status=='0'"
+                type="success"
                 size="mini"
-                type="danger"
-                icon="el-icon-delete"
-                @click="del(scope.row.id)"
-            >
-              删除
+                @click="pay(scope.row.id)">
+              支付
             </el-button>
+
+            <el-button
+                v-if="scope.row.status=='0'"
+                type="danger"
+                size="mini"
+                @click="cancel(scope.row.id)">
+              取消
+            </el-button>
+
+            <span v-if="scope.row.status=='1'">等待接单</span>
+
+            <span v-if="scope.row.status=='2'">等待服务</span>
+
+            <span v-if="scope.row.status=='3'">服务进行中</span>
+
+            <span v-if="scope.row.status=='4'">订单完成</span>
+
+            <span v-if="scope.row.status=='5'">订单已取消</span>
 
           </template>
 
@@ -183,9 +180,6 @@ export default {
       pageSize: 10,
       total: 0,
 
-      form: {},
-      fromVisible: false,
-
     }
 
   },
@@ -231,19 +225,29 @@ export default {
     },
 
 
-    del(id) {
+    handleCurrentChange(pageNum) {
 
-      this.$confirm('确定删除该订购吗？', '提示', {type: 'warning'}).then(() => {
+      this.pageNum = pageNum
 
-        this.$request.delete('/front/registerInfo/delete/' + id).then(res => {
+      this.loadOrders()
 
-          if (res.code === '200') {
+    },
 
-            this.$message.success('删除成功')
 
-            this.loadOrders(1)
+    // 支付
+    pay(id){
 
-          } else {
+      this.$confirm('确认支付该订单吗？','提示',{type:"warning"}).then(()=>{
+
+        this.$request.put("/front/registerInfo/pay/"+id).then(res=>{
+
+          if(res.code==='200'){
+
+            this.$message.success("支付成功")
+
+            this.loadOrders()
+
+          }else{
 
             this.$message.error(res.msg)
 
@@ -256,9 +260,28 @@ export default {
     },
 
 
-    handleCurrentChange(pageNum) {
+    // 取消
+    cancel(id){
 
-      this.loadOrders(pageNum)
+      this.$confirm('确认取消订单吗？','提示',{type:"warning"}).then(()=>{
+
+        this.$request.put("/front/registerInfo/cancel/"+id).then(res=>{
+
+          if(res.code==='200'){
+
+            this.$message.success("订单已取消")
+
+            this.loadOrders()
+
+          }else{
+
+            this.$message.error(res.msg)
+
+          }
+
+        })
+
+      })
 
     }
 
