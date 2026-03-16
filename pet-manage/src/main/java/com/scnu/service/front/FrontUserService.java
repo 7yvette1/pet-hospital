@@ -104,6 +104,27 @@ public class FrontUserService {
         return user;
     }
 
+    public FrontUser loginByCode(FrontUser frontUser) {
+
+        // 根据手机号查询用户
+        FrontUser user = frontUserMapper.selectByPhone(frontUser.getPhone());
+
+        if (Objects.isNull(user)) {
+            throw new BusinessErrorException(BusinessMsgEnum.USER_ACCOUNT_ERROR);
+        }
+
+        // 生成JWT
+        Map<String, String> payload = new HashMap<>();
+        payload.put("userId", user.getUserId().toString());
+        payload.put("userName", user.getUserName());
+
+        String jwt = JWTUtils.getToken(payload);
+
+        user.setToken(jwt);
+
+        return user;
+    }
+
     /**
      * 注册
      */

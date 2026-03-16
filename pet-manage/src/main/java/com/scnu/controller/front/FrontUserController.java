@@ -81,6 +81,32 @@ public class FrontUserController {
         return Result.success(frontUser);
     }
 
+    @PostMapping("/loginByCode")
+    public Result loginByCode(@RequestBody FrontUser frontUser) {
+
+        if (ObjectUtil.isEmpty(frontUser.getPhone())
+                || ObjectUtil.isEmpty(frontUser.getCode())) {
+
+            return Result.error(
+                    BusinessMsgEnum.PARAMETER_ERROR.code,
+                    BusinessMsgEnum.PARAMETER_ERROR.msg
+            );
+        }
+
+        // 调用 SmsService 校验验证码
+        boolean ok = smsService.verifyCode(frontUser.getPhone(), frontUser.getCode());
+        if (!ok) {
+            return Result.error(
+                    BusinessMsgEnum.VERIFICATION_CODE_ERROR.code,
+                    BusinessMsgEnum.VERIFICATION_CODE_ERROR.msg
+            );
+        }
+        frontUser = frontUserService.loginByCode(frontUser);
+        return Result.success(frontUser);
+    }
+
+
+
     /**
      * 注册（带短信验证码校验）
      */

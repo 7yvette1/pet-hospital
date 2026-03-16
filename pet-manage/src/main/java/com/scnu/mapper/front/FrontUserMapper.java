@@ -50,4 +50,12 @@ public interface FrontUserMapper {
      */
     @Select("select * from front_user where user_name = #{userName}")
     FrontUser selectByUsername(String userName);
+
+    /**
+     *
+     * 根据手机号查询用户
+     */
+    @Select("select * from front_user where phone = #{phone}")
+    FrontUser selectByPhone(String phone);
+
 }

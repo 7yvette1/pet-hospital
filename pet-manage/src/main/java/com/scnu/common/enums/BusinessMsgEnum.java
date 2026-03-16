@@ -32,7 +32,8 @@ public enum BusinessMsgEnum {
     REGISTER_INFO_EMPTY("5009", "信息填写不完整！"),
 
     SMS_SEND_LIMIT("5010", "请60秒后再获取验证码"),
-    SMS_SEND_ERROR("5011", "验证码验证失败");
+    SMS_SEND_ERROR("5011", "验证码验证失败"),
+    PARAMETER_ERROR("5012", "手机号或验证码不能为空");
 
 
 
