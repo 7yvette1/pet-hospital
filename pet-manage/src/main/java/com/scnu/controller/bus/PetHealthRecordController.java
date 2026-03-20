@@ -20,9 +20,7 @@ public class PetHealthRecordController {
      */
     @PostMapping("/add")
     public Result add(@RequestBody PetHealthRecord record) {
-
         petHealthRecordService.add(record);
-
         return Result.success();
     }
 
@@ -32,9 +30,7 @@ public class PetHealthRecordController {
      */
     @PutMapping("/update")
     public Result update(@RequestBody PetHealthRecord record) {
-
         petHealthRecordService.updateById(record);
-
         return Result.success();
     }
 
@@ -44,9 +40,7 @@ public class PetHealthRecordController {
      */
     @DeleteMapping("/delete/{id}")
     public Result delete(@PathVariable Integer id) {
-
         petHealthRecordService.deleteById(id);
-
         return Result.success();
     }
 
@@ -60,10 +54,8 @@ public class PetHealthRecordController {
             @RequestParam Integer pageNum,
             @RequestParam Integer pageSize
     ) {
-
         PageInfo<PetHealthRecord> pageInfo =
                 petHealthRecordService.selectPage(record, pageNum, pageSize);
-
         return Result.success(pageInfo);
     }
 
@@ -77,7 +69,6 @@ public class PetHealthRecordController {
             @RequestParam Integer pageNum,
             @RequestParam Integer pageSize
     ) {
-
         PageInfo<PetHealthRecord> pageInfo =
                 petHealthRecordService.selectMyPage(record, pageNum, pageSize);
 

@@ -76,5 +76,4 @@ public class PetHealthRecordService {
         List<PetHealthRecord> list = petHealthRecordMapper.selectMyPage(record);
         return PageInfo.of(list);
     }
-
 }

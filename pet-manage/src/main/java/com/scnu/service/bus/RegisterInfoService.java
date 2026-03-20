@@ -92,13 +92,9 @@ public class RegisterInfoService {
      * 用户支付订单
      */
     public void pay(Integer id){
-
         RegisterInfo info = registerInfoMapper.selectById(id);
-
         info.setStatus("1"); //已支付
-
         info.setPayTime(DateUtil.now());
-
         registerInfoMapper.updateById(info);
     }
 
@@ -106,17 +102,11 @@ public class RegisterInfoService {
      * 后台接单
      */
     public void accept(Integer id){
-
         RegisterInfo info = registerInfoMapper.selectById(id);
-
         SysUser currentUser = TokenUtils.getCurrentUser();
-
         info.setReceiveId(currentUser.getUserId());
-
         info.setReceiveTime(DateUtil.now());
-
         info.setStatus("2"); //已接单
-
         registerInfoMapper.updateById(info);
     }
 
@@ -124,13 +114,9 @@ public class RegisterInfoService {
      * 开始服务
      */
     public void start(Integer id){
-
         RegisterInfo info = registerInfoMapper.selectById(id);
-
         info.setStatus("3"); //服务中
-
         info.setStartTime(DateUtil.now());
-
         registerInfoMapper.updateById(info);
     }
 
@@ -138,13 +124,9 @@ public class RegisterInfoService {
      * 完成服务
      */
     public void finish(Integer id){
-
         RegisterInfo info = registerInfoMapper.selectById(id);
-
         info.setStatus("4"); //已完成
-
         info.setFinishTime(DateUtil.now());
-
         registerInfoMapper.updateById(info);
     }
 
@@ -152,11 +134,8 @@ public class RegisterInfoService {
      * 取消订单
      */
     public void cancel(Integer id){
-
         RegisterInfo info = registerInfoMapper.selectById(id);
-
         info.setStatus("5"); //已取消
-
         registerInfoMapper.updateById(info);
     }
 
@@ -224,7 +203,7 @@ public class RegisterInfoService {
     }
 
     /**
-     * 医生订单
+     * 服务人员订单
      */
     public PageInfo<RegisterInfo> selectPage2(RegisterInfo registerInfo, Integer pageNum, Integer pageSize) {
 
